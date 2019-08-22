@@ -99,7 +99,7 @@ while winner == false
     cark = "X"
     turn = 1
   end
-  puts "the string is #{board}"
+
 
   #If statements to calculate if anyone won   
   if board[0] + board[1] + board[2] == 3
