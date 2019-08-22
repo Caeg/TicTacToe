@@ -1,5 +1,7 @@
+#Array of the board
 board = [0,0,0,0,0,0,0,0,0]
 
+#ASCII UI for the board
 boardGrapic = "          
       *       *
   1   *   2   *   3
@@ -18,14 +20,18 @@ print boardGrapic
 print"Player 1 will be X and player 2 will be @.\n"
 
 print"The coin has been flipped!\n" 
+
+# Generates random number to determine who goes first
 coinflip = rand(2)
 
+#Notify user who goes first
 if coinflip == 0
   puts "Player 1 goes first!"
 else 
   puts "Player 2 goes first!"
 end
 
+#Sets the game for who ever goes first
 if coinflip - 1 != 0
   cark = "X"
 else
@@ -34,13 +40,14 @@ end
 
 turn = 1
 
+#Sets counter for turns
 if cark == "X"
   turn = 1
 else
   turn = 2
 end
 
-
+#Loop until someone wins
 winner = false
 updated = ""
 while winner == false
@@ -48,7 +55,7 @@ while winner == false
 
   input = gets.chomp
   
-
+  #Determines if the number is valid
   if input.to_i < 1 || input.to_i > 9
     print "This number is either too big or not a number.:(\n"
     until input.to_i > 0 && input.to_i < 10
@@ -58,6 +65,7 @@ while winner == false
     end
   end
 
+  #Determines if the spot is taken on the board   
   if board[input.to_i-1] != 0
     print "This spot is taken. :(\n"
     until board[input.to_i-1] == 0
@@ -67,7 +75,7 @@ while winner == false
     end
   end
 
-
+  #Sets who's turn will be next   
   if turn - 1 == 0
     cark = "X"
   else
@@ -76,6 +84,7 @@ while winner == false
   boardGrapic= boardGrapic.gsub(input, cark)
   print boardGrapic
 
+  #Adds value to an array to calculate winner   
   if cark == "X"
     board.delete_at(input.to_i-1)
     board.insert(input.to_i - 1, 1)
@@ -92,6 +101,7 @@ while winner == false
   end
   puts "the string is #{board}"
 
+  #If statements to calculate if anyone won   
   if board[0] + board[1] + board[2] == 3
     puts "The winner is player 1!"
     winner = true
